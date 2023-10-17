@@ -1,32 +1,24 @@
 <section class="border-box m-0 p-0 w-full min-h-screen flex items-center justify-center bg-[#10141E]">
-  <div class="flex flex-col gap-y-[5.8175rem] items-center">
+  <div class="flex flex-col gap-y-[5.8175rem] items-center text-white">
     <img src="../assets/movie.svg" alt="movie-logo" class="w-[2rem] h-[1.6rem]"/>
-    <form #loginForm="ngForm"  (ngSubmit)="onSubmit(loginForm)"  class="flex flex-col gap-y-[2.5rem] justify-center bg-[#161d2f] rounded-[1.25rem] w-[25rem] h-[23.3125rem] p-[2rem]">
+
+    <form #loginForm="ngForm"  (ngSubmit)="onSubmit()"  class="flex flex-col gap-y-[2.5rem] justify-center bg-[#161d2f] rounded-[1.25rem] w-[25rem]  p-[2rem]">
       <h2 class="text-[2rem] font-light text-[#fff]">Login</h2>
       <div class="flex flex-col gap-y-[1.25rem]">
-        <input #emailInput="ngModel" type="text" [(ngModel)]="email"  name="email" required placeholder="Email Address" class="text-white bg-[#161d2f] h-[2.3125rem] bg-none focus:outline-none pl-4 pb-6 placeholder:text-[0.9375rem] placeholder:font-light placeholder:text-opacity-50 border-b  border-[#5a698f] w-[21rem]"/>
-        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-          <div *ngIf="emailInput.errors" class="error-message">
-            Email is required
-          </div>
-          <div *ngIf="emailInput.invalid" class="error-message">
-            Invalid email form
-          </div>
+        <input #emailInput="ngModel" type="text" [(ngModel)]="email"  name="email" required placeholder="Email Address" class="text-white bg-[#161d2f] h-[2.3125rem] bg-none focus:outline-none pl-4 pb-6 placeholder:text-[0.9375rem] placeholder:font-light placeholder:text-opacity-50 border-b  border-[#5a698f] w-[21rem]" [class]="formFill ? 'border-[#5a698f]': 'border-[#9f0630]'"/>
+        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+            Email is required and invalid
         </div>
-        <input #passwordInput="ngModel" type="password" name="password" [(ngModel)]="password"  name="password" required placeholder="Password" class="text-white bg-[#161d2f] pl-4 pb-6 h-[2.3125rem] focus:outline-none  placeholder:text-[0.9375rem] placeholder:font-light placeholder:text-opacity-50 border-b  border-[#5a698f] w-[21rem]"/>
-        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-          <div *ngIf="passwordInput.errors" class="error-message">
-            Password is required
-          </div>
-          <div *ngIf="passwordInput.errors" class="error-message">
-            Invalid password form
-          </div>
+        <input #passwordInput="ngModel" type="password" name="password" [(ngModel)]="password"  name="password" required placeholder="Password" class="text-white bg-[#161d2f] pl-4 pb-6 h-[2.3125rem] focus:outline-none  placeholder:text-[0.9375rem] placeholder:font-light placeholder:text-opacity-50 border-b  border-[#5a698f] w-[21rem]" (ngModelChange)="onInputChange()" [class]="formFill ? 'border-[#5a698f]': 'border-[#9f0630]'"/>
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+          Password is required and invalid
         </div>
       </div>
       <div class="flex flex-col gap-y-4 items-center">
-        <button type="submit" class="bg-[#fc4747] rounded-[0.375rem] w-full h-[3rem] text-center font-light text-[0.9375rem] text-[#fff] hover:text-[#161D2F] hover:bg-white">Login to your account</button>
+        <button [disabled]="loginForm.invalid" type="submit" class="bg-[#fc4747] rounded-[0.375rem] w-full h-[3rem] text-center font-light text-[0.9375rem] text-[#fff] hover:text-[#161D2F] hover:bg-white transition">Login to your account</button>
         <p class="font-light text-[0.9375rem] text-white">Don't have an account? <span class="text-[#FC4747] cursor-pointer">Sign Up</span></p>
       </div>
     </form>
+    
   </div>
 </section>

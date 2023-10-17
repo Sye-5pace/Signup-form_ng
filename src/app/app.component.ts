@@ -6,17 +6,30 @@ import {NgForm} from '@angular/forms'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
 export class AppComponent {
-  // @ViewChild('loginForm') loginForm: ElementRef;
 
   email: string = '';
   password: string = '';
+  isDisabled: boolean = false;  
+  formFill : boolean = false;
+  isDisplay: boolean = false;
 
-  onSubmit(loginForm: NgForm){
-    if(loginForm.form.valid){
-      console.log('Email Address:' + this.email)
-      console.log('Password:' + this.password)
+  onInputChange(){
+    this.formFill = this.email.trim()  !== '' && this.password.trim() !== ''
+  }
+
+  onSubmit(){
+    if(this.email && this.password){
+      this.formFill = true
+      this.isDisplay= true;
+      console.log(this.isDisplay)
+      console.log('Login details:' + this.email,this.password)
+      const logins = { email: this.email, password: this.password}
+      localStorage.setItem('logins', JSON.stringify(logins))
     }else{
+      this.formFill = false
       console.log('Login failed')
     }
   }
